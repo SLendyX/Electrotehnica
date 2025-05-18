@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function({label, name, type}){
+export default function({label, name, type, value=0}){
     return (
         <>
-            <label>
+            <label htmlFor={name}>
                 {label}
-                <input id={name} placeholder={name} type={type}/>
             </label>
+            <input id={name} placeholder={name} type={type} value={value}/>
         </>
     )
 }

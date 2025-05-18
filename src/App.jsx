@@ -9,7 +9,10 @@ function App() {
     setLab(e.target.value)
   }
 
-  const inputElArray = labInputs
+  const inputElArray = labInputs[lab].map(object =>{
+    const {name, label, type, value} = object
+    return <InputEl name={`${lab}_${name}`} label={label} type={type} value={value}/>
+  })
 
 
   return (
@@ -22,8 +25,10 @@ function App() {
         <option value="asincr">Mașină asincronă funcţionare în sarcină, reglaj turaţie</option>
         <option value="sincr">Generator sincron funcţionând pe reţea proprie</option>
       </select>
-      <br/>
-      <InputEl />
+      <br/><br/>
+      <div className='input-container'>
+        {...inputElArray}
+      </div>
 
     </>
   )
