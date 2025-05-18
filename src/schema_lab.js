@@ -1,4 +1,4 @@
-const labInputs = {
+export const labInputs = {
     trgol: [//L3
         { name: 'Sn', label: 'Puterea aparentă nominală (kVA)', type: 'number' },
         { name: 'U1n', label: 'Tensiune primară nominală (V)', type: 'number' },
@@ -12,7 +12,7 @@ const labInputs = {
         { name: 'U1k', label: 'Tensiune primară gol (V)', type: 'number' },
         { name: 'I1k', label: 'Curent scurtcircuit primar (A)', type: 'number' },
         { name: 'P1k', label: 'Putere scurtcircuit (W)', type: 'number' },
-        { name: 'I2K', label: 'Curent scurtcircuit secundar (A)', ype: 'number' },
+        { name: 'I2K', label: 'Curent scurtcircuit secundar (A)', type: 'number' },
     ],
     monofaz: [//L4
         { name: 'Sn', label: 'Puterea aparentă nominală (kVA)', type: 'number' },
@@ -22,7 +22,7 @@ const labInputs = {
         { name: 'I2n', label: 'Curent nominal secundar (A)', type: 'number' },
         { name: 'P1', label: 'Puterea primar (A)', type: 'number' },
         { name: 'I1', label: 'Curent primar (A)', type: 'number' },
-        { name: 'I2', label: 'Curent secundar (A)', ype: 'number' },
+        { name: 'I2', label: 'Curent secundar (A)', type: 'number' },
         { name: 'U2', label: 'Tensiune secundară (V)', type: 'number' },
       ],
     asincr: [//L7
