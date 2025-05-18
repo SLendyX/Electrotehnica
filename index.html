@@ -20,5 +20,35 @@
     <div id="input-container"></div>
     <button id="calculate-btn">Calculează</button>
     <script src="schema_lab.js"></script>
+    <script>
+document.getElementById("calculate-btn").addEventListener("click", () => {
+    const selectedLab = document.getElementById("lab").value;
+    const inputData = {};
+
+    if (selectedLab && labInputs[selectedLab]) {
+        labInputs[selectedLab].forEach(input => {
+            const value = document.getElementById(`${selectedLab}_${input.name}`).value;
+            inputData[input.name] = parseFloat(value);
+        });
+
+        fetch("http://localhost:5000/calculate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ lab: selectedLab, inputs: inputData })
+        })
+        .then(response => response.json())
+        .then(result => {
+            alert("Rezultate: " + JSON.stringify(result, null, 2));
+        })
+        .catch(err => {
+            alert("Eroare la trimiterea datelor.");
+            console.error(err);
+        });
+    }
+});
+</script>
+
 </body>
 </html>
