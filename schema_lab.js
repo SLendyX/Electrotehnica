@@ -4,15 +4,15 @@ const labInputs = {
         { name: 'U1n', label: 'Tensiune primară nominală (V)', type: 'number' },
         { name: 'U2n', label: 'Tensiune secundară nominală (V)', type: 'number' },
         { name: 'I1n', label: 'Curent nominal primar (A)', type: 'number' },
-        { name: 'I2n', label: 'Curent nominal secundar (A)', ype: 'number' },
+        { name: 'I2n', label: 'Curent nominal secundar (A)', type: 'number' },
         { name: 'U10', label: 'Tensiune primară gol (V)', type: 'number' },
         { name: 'U20', label: 'Tensiune secundară gol (V)', type: 'number' },
         { name: 'I10', label: 'Curent gol (A)', type: 'number' },
-        { name: 'P10', label: 'Puterea la gol (W)', ype: 'number' },
+        { name: 'P10', label: 'Puterea la gol (W)', type: 'number' },
         { name: 'U1k', label: 'Tensiune primară gol (V)', type: 'number' },
         { name: 'I1k', label: 'Curent scurtcircuit primar (A)', type: 'number' },
         { name: 'P1k', label: 'Putere scurtcircuit (W)', type: 'number' },
-        { name: 'I2K', label: 'Curent scurtcircuit secundar (A)', ype: 'number' },
+        { name: 'I2K', label: 'Curent scurtcircuit secundar (A)', type: 'number' },
     ],
     monofaz: [//L4
         { name: 'Sn', label: 'Puterea aparentă nominală (kVA)', type: 'number' },
@@ -22,7 +22,7 @@ const labInputs = {
         { name: 'I2n', label: 'Curent nominal secundar (A)', type: 'number' },
         { name: 'P1', label: 'Puterea primar (A)', type: 'number' },
         { name: 'I1', label: 'Curent primar (A)', type: 'number' },
-        { name: 'I2', label: 'Curent secundar (A)', ype: 'number' },
+        { name: 'I2', label: 'Curent secundar (A)', type: 'number' },
         { name: 'U2', label: 'Tensiune secundară (V)', type: 'number' },
       ],
     asincr: [//L7
@@ -59,3 +59,31 @@ const labInputs = {
         { name: 'I', label: 'Curent (A)', type: 'number' },
     ]
   };
+document.getElementById("lab").addEventListener("change", (event) => {
+  const selectedLab = event.target.value;
+  const inputContainer = document.getElementById("input-container");
+
+  inputContainer.innerHTML = "";
+
+  if (selectedLab && labInputs[selectedLab]) {
+    labInputs[selectedLab].forEach(input => {
+      const label = document.createElement("label");
+      label.textContent = input.label;
+      label.setAttribute("for", `${selectedLab}_${input.name}`);
+
+      const inputElement = document.createElement("input");
+      inputElement.type = input.type;
+      inputElement.id = `${selectedLab}_${input.name}`;
+      inputElement.name = `${selectedLab}_${input.name}`;
+
+      inputContainer.appendChild(label);
+      inputContainer.appendChild(document.createElement("br"));
+      inputContainer.appendChild(inputElement);
+      inputContainer.appendChild(document.createElement("br"));
+    });
+  }
+});
+labInputs[selectedLab].forEach(input => {
+  const value = document.getElementById(`${selectedLab}_${input.name}`).value;
+  inputData[input.name] = parseFloat(value);
+});
