@@ -4,16 +4,53 @@ import InputEl from './InputEl'
 
 function App() {
   const [lab, setLab] = useState("trgol")
+  const [labArray, setLabArray] = useState({labInputs})
+
+  const numberRegex = /[^0-9,. ]/g
 
   function selectChange(e){
     setLab(e.target.value)
   }
 
-  const inputElArray = labInputs[lab].map(object =>{
+  function updateInputs(e){
+    const value = e.target.value
+
+    if(typeof value === "string" && value.match(numberRegex) !== null){
+      return
+    }
+
+    const [category, name] = e.target.id.split("_")
+    
+    setLabArray(oldLabArray => {
+      const updatedCategory = oldLabArray.labInputs[category].map(object => {
+        if(object.name === name){
+          if(typeof value !== "string")
+            object.value = value
+          else if(value.includes("."))
+            object.value = Number(value)
+          else
+            object.value = value.split(",").map(string => {
+              if(string !== "")
+                return Number(string)
+            })
+
+        }
+
+        return object
+      })
+      oldLabArray[category] = [...updatedCategory]
+
+      return {...oldLabArray}
+    })
+    
+  }
+
+  const inputElArray = labArray.labInputs[lab].map(object =>{
     const {name, label, type, value} = object
-    return <InputEl name={`${lab}_${name}`} label={label} type={type} value={value}/>
+    return <InputEl name={`${lab}_${name}`} label={label} type={type} value={value} onChange={updateInputs}/>
   })
 
+  // console.log(labArray.labInputs[lab])
 
   return (
     <>
