@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { labInputs } from './schema_lab'
 import InputEl from './InputEl'
 import Rezultate from './Rezultate'
+import Plot from 'react-plotly.js'
 
 function App() {
   const [lab, setLab] = useState("trgol")
@@ -52,7 +53,8 @@ function App() {
     return <InputEl name={`${lab}_${name}`} label={label} type={type} value={value} onChange={updateInputs}/>
   })
 
-  // console.log(labArray.labInputs[lab])
+  console.log(labArray.labInputs[lab])
+  console.log(data)
 
   return (
     <>
@@ -70,6 +72,43 @@ function App() {
       </div>
 
       <Rezultate inputArray={labArray.labInputs[lab]} category={lab} setData={setData}/>
+
+      <Plot
+        data={[
+        {
+          x: data.x2,
+          y: data.y2,
+          type: 'scatter',
+          mode: 'lines+markers',
+          marker: { color: 'blue' },
+        },
+        {
+          x: data.x2,
+          y: data.y2,
+          type: 'scatter',
+          mode: 'lines+markers',
+          marker: { color: 'orange' },
+        },
+      ]}
+      layout={{
+        width: '100%',
+        height: 800,
+        title: { text: 'Graficul' },
+        xaxis: {
+          title: {
+            text: 'E (V)',       
+            font: { size: 14 },
+          },
+        },
+        yaxis: {
+          title: {
+            text: 'Iₑ (A)',      
+            font: { size: 14 },
+          },
+        },
+        legend: { orientation: 'h', x: 0.5, xanchor: 'center' },
+      }}
+    />
 
     </>
   )

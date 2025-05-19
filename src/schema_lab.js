@@ -36,7 +36,7 @@ export const labInputs = {
         { name: 'ƒn', label: 'Frecvența nominală (Hz)', type: 'number', value: 50 },
         { name: 'nn', label: 'Turația nominală (rpm)', type: 'number', value: 920 },
         { name: 'n1', label: 'n1 (rpm)', type: 'number', value: 1000 },
-        { name: 'PGn', label: 'Puterea generată nominală (kW)', type: 'number', value: 3.4 },
+        { name: 'PGn', label: 'Puterea generată nominală (W)', type: 'number', value: 3400 },
         { name: 'UGn', label: 'Tensiune generată la ieșire (V)', type: 'number', value: 170 },
         { name: 'IGn', label: 'Curent generat la ieșire (A)', type: 'number', value: 20 },
         { name: 'Uen', label: 'Tensiune de excitație (V)', type: 'number', value: 170 },

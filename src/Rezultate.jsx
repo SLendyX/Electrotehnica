@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function({inputArray, category, setData}){
 
     let rezultate = {};
-    let data = {}
-
-    /*
-    {
-    x:[]..
-    }
-    */
 
     if (category === "trgol") {
         const get = name => Number(inputArray.find(obj => obj.name === name)?.value || 0);
@@ -47,6 +40,10 @@ export default function({inputArray, category, setData}){
             const uka = (Rk * I1n) / U1n * 100;
             const ukr = (Xk * I1n) / U1n * 100;
             rezultate = { kT, cos_phi10, sin_phi10, Iw, Iu, cos_phi1k, Zk, Rk, Xk, uk, uka, ukr };
+
+            useEffect(() => {                
+                setData({})
+            }, [inputArray, category])
         }   
     }
     if (category === "monofaz"){
@@ -84,16 +81,23 @@ export default function({inputArray, category, setData}){
                 };
             });
         }
-        const x1 = rezultate.map(entry => entry.I2);
-        const y1 = rezultate.map(entry => entry.U2);
-        const x2 = rezultate.map(entry => entry.I2);
-        const y2 = rezultate.map(entry => entry.randament);
-        setData({
-            x1: x1,
-            y1: y1,
-            x2: x2,
-            y2: y2
-        })
+
+        useEffect(() => {
+            if (rezultate && rezultate.length > 0) {
+                const x1 = rezultate.map(entry => entry.I2);
+                const y1 = rezultate.map(entry => entry.U2);
+                const x2 = rezultate.map(entry => entry.I2);
+                const y2 = rezultate.map(entry => entry.randament);
+                
+                setData({
+                    x1: x1,
+                    y1: y1,
+                    x2: x2,
+                    y2: y2
+                })
+            }
+        }, [inputArray, category])
+        
     }
 
     if (category === "asincr"){
@@ -125,24 +129,32 @@ export default function({inputArray, category, setData}){
                 };
             });
         }
-        const x1 = rezultate.map(entry => entry.M);
-        const y1 = rezultate.map(entry => entry.n);
-        const x2 = rezultate.map(entry => entry.s);
-        const y2 = rezultate.map(entry => entry.M);
-        const x3 = rezultate.map(entry => entry.P2);
-        const y3 = rezultate.map(entry => entry.randament);
-        setData({
-            x1: x1,
-            y1: y1,
-            x2: x2,
-            y2: y2,
-            x3: x3,
-            y3: y3
-        })
+
+
+        useEffect(() => {
+            if (rezultate && rezultate.length > 0) {
+                const x1 = rezultate.map(entry => entry.M);
+                const y1 = rezultate.map(entry => entry.n);
+                const x2 = rezultate.map(entry => entry.s);
+                const y2 = rezultate.map(entry => entry.M);
+                const x3 = rezultate.map(entry => entry.P2);
+                const y3 = rezultate.map(entry => entry.randament);
+                setData({
+                    x1: x1,
+                    y1: y1,
+                    x2: x2,
+                    y2: y2,
+                    x3: x3,
+                    y3: y3
+                })
+            }
+        }, [inputArray, category])
+
     }
     if (category === "sincr"){
         const get = name => inputArray.find(obj => obj.name === name)?.value || 0;
         const U0 = get("U0"), Ie = get("Ie"), I = get("I"), U = get("U");
+
         if ([U0, Ie].every(arr => Array.isArray(arr) && arr.length === Ie.length)) {
             rezultate = Ie.map((ie, idx) => {
                 const u0 = U0[idx];
@@ -152,32 +164,49 @@ export default function({inputArray, category, setData}){
                 };
             });
         }
+
         if ([U, I].every(arr => Array.isArray(arr) && arr.length === I.length)){
-            rezultate = I.map((i, idx) => {
+            rezultate = [rezultate, I.map((i, idx) => {
                 const u = U[idx];
                 return {
                     U: u,
                     I: i
                 };
-            });
+            })]
         }
-        const x1 = rezultate.map(entry => entry.U0);
-        const y1 = rezultate.map(entry => entry.Ie);
-        const x2 = rezultate.map(entry => entry.U);
-        const y2 = rezultate.map(entry => entry.I);
-        setData({
-            x1: x1,
-            y1: y1,
-            x2: x2,
-            y2: y2
-        })
+
+        useEffect(() => {
+            if (rezultate && rezultate.length > 0) {
+                const x1 = rezultate[0].map(entry => entry.U0);
+                const y1 = rezultate[0].map(entry => entry.Ie);
+                const x2 = rezultate[1].map(entry => entry.U);
+                const y2 = rezultate[1].map(entry => entry.I);
+                setData({
+                    x1: x1,
+                    y1: y1,
+                    x2: x2,
+                    y2: y2
+                })
+            }
+        }, [inputArray, category])
     }
 
     rezultate = Array.isArray(rezultate) ? rezultate : [rezultate]
 
+    
 
-
-    const tableRowArray = [<tr>{Object.keys(rezultate[0]).map(key => <td>{key}</td>)}</tr>
+    const tableRowArray = Array.isArray(rezultate[0]) ? 
+    rezultate.map(table => {
+        return [<tr>{Object.keys(table[0]).map(key => <td>{key}</td>)}</tr>, ...table.map(entry => {
+            return (
+                <tr>
+                    {Object.keys(entry).map(key => <td>{parseFloat(entry[key].toFixed(3))}</td>)}
+                </tr>
+                )
+            })
+        ]
+    })
+    : [<tr>{Object.keys(rezultate[0]).map(key => <td>{key}</td>)}</tr>
         , ...rezultate.map(entry => {
             return (
             <tr>
@@ -186,13 +215,31 @@ export default function({inputArray, category, setData}){
             )
     })
     ]
+
     return(
         <>
-            <table className="tabel-rezultate" border={2}>
-                <tbody>
-                    {...tableRowArray}
-                </tbody>
-            </table>
+            {
+                Array.isArray(rezultate[0]) ?
+                    <div>
+                        <table className="tabel-rezultate" border={2}>
+                            <tbody>
+                                {...tableRowArray[0]}
+                            </tbody>
+                        </table>
+                        <table className="tabel-rezultate" border={2}>
+                            <tbody>
+                                {...tableRowArray[1]}
+                            </tbody>
+                        </table>
+                    </div>
+                :
+                <table className="tabel-rezultate" border={2}>
+                    <tbody>
+                        {...tableRowArray}
+                    </tbody>
+                </table>
+            }
+            
         </>
     )
 }
