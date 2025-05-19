@@ -66,7 +66,7 @@ function App() {
       <br/><br/>
       <div className='input-container'>
         {...inputElArray}
-        <Rezultate inputArray={labArray.labInputs}/>
+        <Rezultate inputArray={labArray.labInputs[lab]}/>
       </div>
 
     </>
