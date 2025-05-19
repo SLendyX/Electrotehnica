@@ -24,6 +24,9 @@ export const labInputs = {
         { name: 'I1', label: 'Curent primar (A)', type: 'text', value: [0.8, 0.9, 1.1, 1.5, 1.9] },
         { name: 'I2', label: 'Curent secundar (A)', type: 'text', value: [3, 3.18, 4.48, 6.44, 8.2] },
         { name: 'U2', label: 'Tensiune secundară (V)', type: 'text', value: [48.1, 48, 47.9, 47.8, 47.7] },
+        { name: 'U1', label: 'U1 (V)', type: 'number', value: 210},
+        { name: 'cos ϕ2', label: 'cos ϕ2 (-)', type: 'number', value: 1 },
+        { name: 'ƒ1', label: 'ƒ1(Hz)', type: 'number', value: 50 },
     ],
     asincr: [//L7
         { name: 'Pn', label: 'Puterea nominala (kW)', type: 'number', value: 3 },
@@ -32,6 +35,7 @@ export const labInputs = {
         { name: 'cos ϕn', label: 'Factorul de putere nominal (-)', type: 'number', value: 0.69 },
         { name: 'ƒn', label: 'Frecvența nominală (Hz)', type: 'number', value: 50 },
         { name: 'nn', label: 'Turația nominală (rpm)', type: 'number', value: 920 },
+        { name: 'n1', label: 'n1 (rpm)', type: 'number', value: 1000 },
         { name: 'PGn', label: 'Puterea generată nominală (kW)', type: 'number', value: 3.4 },
         { name: 'UGn', label: 'Tensiune generată la ieșire (V)', type: 'number', value: 170 },
         { name: 'IGn', label: 'Curent generat la ieșire (A)', type: 'number', value: 20 },
@@ -42,7 +46,7 @@ export const labInputs = {
         { name: 'I1', label: 'Curent primar (A)', type: 'text', value: [4.354, 4.357, 4.358, 4.359, 4.361, 4.367] },
         { name: 'P1', label: 'Puterea primar (W)', type: 'text', value: [145, 278, 291, 306, 324, 372] },
         { name: 'UG', label: 'Tensiune primară (V)', type: 'text', value: [66, 49, 47, 45, 43, 37] },
-        { name: 'IG', label: 'Curent primar (A)', type: 'text', value: [0.7, 2.5, 2.7, 2.9, 3.1, 3.75] },
+        { name: 'IG', label: 'Curent generat IG (A)', type: 'text', value: [0.7, 2.5, 2.7, 2.9, 3.1, 3.75] },
         { name: 'n', label: 'turația (rpm)', type: 'text', value: [929, 713, 691, 666, 637, 560] },
     ],
     sincr: [//L9
@@ -56,7 +60,7 @@ export const labInputs = {
         { name: 'Ie', label: 'Curent gol (A)', type: 'text', value: [0, 0.5, 0.55, 0.6, 0.65, 0.75, 0.8, 0.9, 0.7] },
         { name: 'Ie_sarc', label: 'Curent sarcina Ie(A)', type: 'number', value: 0.58 },
         { name: 'cos ϕ', label: 'Factorul de putere (-)', type: 'number', value: 1 },
-        { name: 'n', label: 'Turația sarcina n(rpm)', type: 'number', value: 750 },
+        { name: 'n', label: 'Turația n(rpm)', type: 'number', value: 750 },
         { name: 'U', label: 'Tensiune (V)', type: 'text', value: [100, 94.76, 86.6, 81.5, 68.1, 60.4, 51] },
         { name: 'I', label: 'Curent (A)', type: 'text', value: [0, 1.2, 2.24, 3.04, 3.81, 4.24, 4.8] },
     ]
