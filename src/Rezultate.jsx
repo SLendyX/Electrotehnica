@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function({inputArray}){
+export default function({inputArray, category}){
 
 //aici formule si definitie array resultate[]
 
