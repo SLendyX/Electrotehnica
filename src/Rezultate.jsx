@@ -45,7 +45,8 @@ export default function({inputArray, category, setData}){
             const X1 = X2_prim = Xk / 2;
             const R2 = R2_prim * (1/kT)**2;
             const X2 = X2_prim * (1/kT)**2;
-            rezultate = { kT, cos_phi10, sin_phi10, Iw, Iu, cos_phi1k, Zk, Rk, Xk, uk, uka, ukr, R1, X1, R2, X2 };
+            const Pfe = P10 - R1 * I10 ** 2;
+            rezultate = { kT, cos_phi10, sin_phi10, Iw, Iu, cos_phi1k, Zk, Rk, Xk, uk, uka, ukr, R1, R2_prim, X1, X2_prim, R2, X2, Pfe };
 
             useEffect(() => {                
                 setData([])
