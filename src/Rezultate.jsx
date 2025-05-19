@@ -42,7 +42,7 @@ export default function({inputArray, category, setData}){
             rezultate = { kT, cos_phi10, sin_phi10, Iw, Iu, cos_phi1k, Zk, Rk, Xk, uk, uka, ukr };
 
             useEffect(() => {                
-                setData({})
+                setData([])
             }, [inputArray, category])
         }   
     }
@@ -89,12 +89,24 @@ export default function({inputArray, category, setData}){
                 const x2 = rezultate.map(entry => entry.I2);
                 const y2 = rezultate.map(entry => entry.randament);
                 
-                setData({
-                    x1: x1,
-                    y1: y1,
-                    x2: x2,
-                    y2: y2
-                })
+                setData(
+                    [
+                    {
+                        x: x1,
+                        y: y1,
+                        xLabel: "I2",
+                        yLabel: "U2",
+                        color: "blue"
+                    },
+                    {
+                        x: x2,
+                        y: y2,
+                        xLabel: "I2",
+                        yLabel: "randament",
+                        color: "orange"
+                    }
+                ]   
+                )
             }
         }, [inputArray, category])
         
@@ -139,14 +151,31 @@ export default function({inputArray, category, setData}){
                 const y2 = rezultate.map(entry => entry.M);
                 const x3 = rezultate.map(entry => entry.P2);
                 const y3 = rezultate.map(entry => entry.randament);
-                setData({
-                    x1: x1,
-                    y1: y1,
-                    x2: x2,
-                    y2: y2,
-                    x3: x3,
-                    y3: y3
-                })
+                setData(
+                   [ 
+                    {
+                        x: x1,
+                        y: y1,
+                        xLabel: "M",
+                        yLabel: "n",
+                        color: "blue"
+                    },
+                    {
+                        x: x2,
+                        y: y2,
+                        xLabel: "s",
+                        yLabel: "M",
+                        color: "red",
+                    },
+                    {
+                        x: x3,
+                        y: y3,
+                        xLabel: "P2",
+                        yLabel: "randament",
+                        color: "green"
+                    }
+                    ]
+                )
             }
         }, [inputArray, category])
 
@@ -181,12 +210,22 @@ export default function({inputArray, category, setData}){
                 const y1 = rezultate[0].map(entry => entry.Ie);
                 const x2 = rezultate[1].map(entry => entry.U);
                 const y2 = rezultate[1].map(entry => entry.I);
-                setData({
-                    x1: x1,
-                    y1: y1,
-                    x2: x2,
-                    y2: y2
-                })
+                setData([
+                    {
+                        x: x1,
+                        y: y1,
+                        xLabel: "U0",
+                        yLabel: "Ie",
+                        color: "blue"
+                    },
+                    {
+                        x: x2,
+                        y: y2,
+                        xLabel: "U",
+                        yLabel: "I",
+                        color: "red"
+                    }
+                ])
             }
         }, [inputArray, category])
     }
@@ -217,7 +256,7 @@ export default function({inputArray, category, setData}){
     ]
 
     return(
-        <>
+        <div className="table-container">
             {
                 Array.isArray(rezultate[0]) ?
                     <div>
@@ -240,6 +279,6 @@ export default function({inputArray, category, setData}){
                 </table>
             }
             
-        </>
+        </div>
     )
 }

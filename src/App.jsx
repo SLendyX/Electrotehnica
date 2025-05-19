@@ -7,7 +7,7 @@ import Plot from 'react-plotly.js'
 function App() {
   const [lab, setLab] = useState("trgol")
   const [labArray, setLabArray] = useState({labInputs})
-  const [data, setData] = useState({})
+  const [data, setData] = useState([])
 
   const numberRegex = /[^0-9,. ]/g
 
@@ -73,42 +73,40 @@ function App() {
 
       <Rezultate inputArray={labArray.labInputs[lab]} category={lab} setData={setData}/>
 
-      <Plot
+      {...data.map(({x, y, xLabel, yLabel, color}) =>{
+        return (
+        <Plot
         data={[
         {
-          x: data.x2,
-          y: data.y2,
+          x,
+          y,
           type: 'scatter',
           mode: 'lines+markers',
-          marker: { color: 'blue' },
+          marker: { color },
         },
-        {
-          x: data.x2,
-          y: data.y2,
-          type: 'scatter',
-          mode: 'lines+markers',
-          marker: { color: 'orange' },
-        },
-      ]}
-      layout={{
-        width: '100%',
-        height: 800,
-        title: { text: 'Graficul' },
-        xaxis: {
-          title: {
-            text: 'E (V)',       
-            font: { size: 14 },
+        ]}
+        layout={{
+          width: '100%',
+          height: 800,
+          title: { text: 'Graficul' },
+          xaxis: {
+            title: {
+              text: xLabel,       
+              font: { size: 14 },
+            },
           },
-        },
-        yaxis: {
-          title: {
-            text: 'Iₑ (A)',      
-            font: { size: 14 },
+          yaxis: {
+            title: {
+              text: yLabel,      
+              font: { size: 14 },
+            },
           },
-        },
-        legend: { orientation: 'h', x: 0.5, xanchor: 'center' },
-      }}
-    />
+          legend: { orientation: 'h', x: 0.5, xanchor: 'center' },
+        }}
+        />
+      ) 
+      })}
+      
 
     </>
   )
