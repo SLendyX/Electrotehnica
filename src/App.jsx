@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { labInputs } from './schema_lab'
 import InputEl from './InputEl'
+import Rezultate from './Rezultate'
 
 function App() {
   const [lab, setLab] = useState("trgol")
@@ -65,6 +66,7 @@ function App() {
       <br/><br/>
       <div className='input-container'>
         {...inputElArray}
+        <Rezultate inputArray={labArray.labInputs}/>
       </div>
 
     </>
