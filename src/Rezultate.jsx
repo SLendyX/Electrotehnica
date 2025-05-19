@@ -76,7 +76,6 @@ export default function({inputArray, category, setData}){
                 const p2 = u2 * i2 * fi2;
                 const randament = p2 / p1 * 100;
                 return {
-                    index: idx + 1,
                     I1: i1,
                     I2: i2,
                     U2: u2,
@@ -102,7 +101,6 @@ export default function({inputArray, category, setData}){
                 const P2 = M * (2 * Math.PI * N / 60);
                 const randament = P2 / p1 * 100;
                 return {
-                    index: idx + 1,
                     I1: i1,
                     U1: u1,
                     n: N,
@@ -125,7 +123,6 @@ export default function({inputArray, category, setData}){
             rezultate = Ie.map((ie, idx) => {
                 const u0 = U0[idx];
                 return {
-                    index: idx + 1,
                     U0: u0,
                     Ie: ie
                 };
@@ -135,7 +132,6 @@ export default function({inputArray, category, setData}){
             rezultate = I.map((i, idx) => {
                 const u = U[idx];
                 return {
-                    index: idx + 1,
                     U: u,
                     I: i
                 };
@@ -151,14 +147,14 @@ export default function({inputArray, category, setData}){
         , ...rezultate.map(entry => {
             return (
             <tr>
-                {Object.keys(entry).map(key => <td>{entry[key].toFixed(3)}</td>)}
+                {Object.keys(entry).map(key => <td>{parseFloat(entry[key].toFixed(3))}</td>)}
             </tr>
             )
     })
     ]
     return(
         <>
-            <table className="tabel-rezultate">
+            <table className="tabel-rezultate" border={2}>
                 <tbody>
                     {...tableRowArray}
                 </tbody>

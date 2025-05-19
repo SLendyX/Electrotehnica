@@ -29,16 +29,16 @@ input::-webkit-inner-spin-button{
 }
 
 .tabel-rezultate{
-    width: 100%;
+    margin: 1em;
 }
 
 .tabel-rezultate tr{
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid grey;
+    float:left;
+    display: block;
 }
 
 .tabel-rezultate tr td{
     text-align: center;
-    
+    padding: .25em .5em;
+    display: block;
 }
