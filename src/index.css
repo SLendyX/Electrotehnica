@@ -5,7 +5,6 @@
 html, body{
     margin: 0;
     padding: 0;
-
 }
 
 div#root{
@@ -38,7 +37,7 @@ input::-webkit-inner-spin-button{
 
 .tabel-rezultate{
     margin: 1em;
-    border-collapse: collapse   ;
+    border-collapse: collapse;
 }
 
 .tabel-rezultate tr{
@@ -50,8 +49,4 @@ input::-webkit-inner-spin-button{
     text-align: center;
     padding: .25em .5em;
     display: block;
-}
-
-.table-container{
-    overflow-x: scroll;
 }
