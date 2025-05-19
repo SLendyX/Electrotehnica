@@ -27,3 +27,18 @@ html, body{
 input::-webkit-inner-spin-button{
     display: none
 }
+
+.tabel-rezultate{
+    width: 100%;
+}
+
+.tabel-rezultate tr{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid grey;
+}
+
+.tabel-rezultate tr td{
+    text-align: center;
+    
+}

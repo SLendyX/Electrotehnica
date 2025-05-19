@@ -6,6 +6,7 @@ import Rezultate from './Rezultate'
 function App() {
   const [lab, setLab] = useState("trgol")
   const [labArray, setLabArray] = useState({labInputs})
+  const [data, setData] = useState({})
 
   const numberRegex = /[^0-9,. ]/g
 
@@ -66,8 +67,9 @@ function App() {
       <br/><br/>
       <div className='input-container'>
         {...inputElArray}
-        <Rezultate inputArray={labArray.labInputs[lab]} category={lab}/>
       </div>
+
+      <Rezultate inputArray={labArray.labInputs[lab]} category={lab} setData={setData}/>
 
     </>
   )
