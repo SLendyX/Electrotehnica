@@ -47,7 +47,7 @@ export default function({inputArray, category, setData}){
             const uka = (Rk * I1n) / U1n * 100;
             const ukr = (Xk * I1n) / U1n * 100;
             rezultate = { kT, cos_phi10, sin_phi10, Iw, Iu, cos_phi1k, Zk, Rk, Xk, uk, uka, ukr };
-        }
+        }   
     }
     if (category === "monofaz"){
         const get = name => inputArray.find(obj => obj.name === name)?.value || 0;
@@ -85,6 +85,16 @@ export default function({inputArray, category, setData}){
                 };
             });
         }
+        const x1 = rezultate.map(entry => entry.I2);
+        const y1 = rezultate.map(entry => entry.U2);
+        const x2 = rezultate.map(entry => entry.I2);
+        const y2 = rezultate.map(entry => entry.randament);
+        setData({
+            x1: x1,
+            y1: y1,
+            x2: x2,
+            y2: y2
+        })
     }
 
     if (category === "asincr"){
@@ -117,6 +127,20 @@ export default function({inputArray, category, setData}){
                 };
             });
         }
+        const x1 = rezultate.map(entry => entry.M);
+        const y1 = rezultate.map(entry => entry.n);
+        const x2 = rezultate.map(entry => entry.s);
+        const y2 = rezultate.map(entry => entry.M);
+        const x3 = rezultate.map(entry => entry.P2);
+        const y3 = rezultate.map(entry => entry.randament);
+        setData({
+            x1: x1,
+            y1: y1,
+            x2: x2,
+            y2: y2,
+            x3: x3,
+            y3: y3
+        })
     }
     if (category === "sincr"){
         const get = name => inputArray.find(obj => obj.name === name)?.value || 0;
@@ -141,6 +165,16 @@ export default function({inputArray, category, setData}){
                 };
             });
         }
+        const x1 = rezultate.map(entry => entry.U0);
+        const y1 = rezultate.map(entry => entry.Ie);
+        const x2 = rezultate.map(entry => entry.U);
+        const y2 = rezultate.map(entry => entry.I);
+        setData({
+            x1: x1,
+            y1: y1,
+            x2: x2,
+            y2: y2
+        })
     }
 
     rezultate = Array.isArray(rezultate) ? rezultate : [rezultate]
