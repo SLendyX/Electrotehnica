@@ -39,7 +39,11 @@ export default function({inputArray, category, setData}){
             const uk = U1k / U1n * 100;
             const uka = (Rk * I1n) / U1n * 100;
             const ukr = (Xk * I1n) / U1n * 100;
-            rezultate = { kT, cos_phi10, sin_phi10, Iw, Iu, cos_phi1k, Zk, Rk, Xk, uk, uka, ukr };
+            const R1 = R2_prim = Rk / 2;
+            const X1 = X2_prim = Xk / 2;
+            const R2 = R2_prim * (1/kT)**2;
+            const X2 = X2_prim * (1/kT)**2;
+            rezultate = { kT, cos_phi10, sin_phi10, Iw, Iu, cos_phi1k, Zk, Rk, Xk, uk, uka, ukr, R1, X1, R2, X2 };
 
             useEffect(() => {                
                 setData([])
@@ -77,6 +81,7 @@ export default function({inputArray, category, setData}){
                     I2: i2,
                     U2: u2,
                     P1: p1,
+                    P2: p2,
                     randament: randament
                 };
             });
