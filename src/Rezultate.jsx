@@ -27,6 +27,8 @@ export default function({inputArray, category, setData}){
                 U2n = Sn / I2n;
             }
         if ([U10, I10, P10, U20, U1k, I1k, P1k].every(x => x !== 0)) {
+            let R2_prim, X2_prim
+
             const kT = U10 / U20;
             const cos_phi10 = P10 / (U10 * I10);
             const sin_phi10 = Math.sqrt(1 - cos_phi10 ** 2);
