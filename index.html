@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css" />
     <title>Electro</title>
+    <script src="schema_lab.js"></script>
 </head>
 <body>
   
@@ -17,38 +18,5 @@
       <option value="asincr">Mașină asincronă funcţionare în sarcină, reglaj turaţie</option>
       <option value="sincr">Generator sincron funcţionând pe reţea proprie</option>
     </select>
-    <div id="input-container"></div>
-    <button id="calculate-btn">Calculează</button>
-    <script src="schema_lab.js"></script>
-    <script>
-document.getElementById("calculate-btn").addEventListener("click", () => {
-    const selectedLab = document.getElementById("lab").value;
-    const inputData = {};
-
-    if (selectedLab && labInputs[selectedLab]) {
-        labInputs[selectedLab].forEach(input => {
-            const value = document.getElementById(`${selectedLab}_${input.name}`).value;
-            inputData[input.name] = parseFloat(value);
-        });
-
-        fetch("http://localhost:5000/calculate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ lab: selectedLab, inputs: inputData })
-        })
-        .then(response => response.json())
-        .then(result => {
-            alert("Rezultate: " + JSON.stringify(result, null, 2));
-        })
-        .catch(err => {
-            alert("Eroare la trimiterea datelor.");
-            console.error(err);
-        });
-    }
-});
-</script>
-
 </body>
 </html>
